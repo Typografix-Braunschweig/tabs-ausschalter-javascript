@@ -1,24 +1,42 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+const mainContainer = document.querySelector("[data-id='810b2e7']");
+const allTabsTitles = document.querySelectorAll(".eael-tab-item-trigger");
+const arrayAllTabsTitles = Array.from(allTabsTitles);
+const allTabsContent = document.querySelectorAll(".eael-tab-content-item");
+const arrayAllTabsContent = Array.from(allTabsContent);
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+console.log(arrayAllTabsContent);
+let idTarget;
 
-setupCounter(document.querySelector('#counter'))
+const getTarget = (e) => {
+
+  arrayAllTabsTitles
+  .filter((title) => title !== e.target)
+  .forEach((element) => {
+     element.classList.remove("active");
+     element.classList.add("inactive");
+     if (e.target.tagName.toLowerCase() === "span") {      
+      element.parentElement.classList.remove("active");
+     element.parentElement.classList.add("inactive");    
+     } else {      
+      /*element.firstElementChild.classList.remove("active");
+     element.firstElementChild.classList.add("inactive");*/    
+  }
+});
+idTarget = e.target.getAttribute("id");
+console.log(idTarget);
+let contentTarget = document.querySelector(`div #${idTarget}-tab`);
+console.log(contentTarget);
+
+  console.log(arrayAllTabsContent
+  .filter((content) => content !== contentTarget));
+
+  /*.forEach((element) => {
+    console.log(element);
+    element.classList.remove("active");
+     element.classList.add("inactive");
+  });*/
+
+};
+
+mainContainer.addEventListener("click", getTarget);
+
