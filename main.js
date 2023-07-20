@@ -3,6 +3,9 @@ const allTabsTitles = document.querySelectorAll(".eael-tab-item-trigger");
 const arrayAllTabsTitles = Array.from(allTabsTitles);
 const allTabsContent = document.querySelectorAll(".eael-tab-content-item");
 const arrayAllTabsContent = Array.from(allTabsContent);
+const test222 = document.querySelector(".eael-tabs-content>div.active");
+console.log(test222);
+
 
 console.log(arrayAllTabsContent);
 let idTarget;
@@ -23,12 +26,12 @@ const getTarget = (e) => {
   }
 });
 idTarget = e.target.getAttribute("id");
-console.log(idTarget);
 let contentTarget = document.querySelector(`div #${idTarget}-tab`);
+console.log(contentTarget.style.display);
 console.log(contentTarget);
 
   console.log(arrayAllTabsContent
-  .filter((content) => content !== contentTarget));
+  .filter((content) => ((content !== test222)&&(content !==contentTarget))));
 
   /*.forEach((element) => {
     console.log(element);
