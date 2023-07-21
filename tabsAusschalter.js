@@ -1,3 +1,5 @@
+export const tabsAuschalter = ()=>{
+
 const mainContainer = document.querySelector("[data-id='810b2e7']");
 const allTabsTitles = document.querySelectorAll(".eael-tab-item-trigger");
 const arrayAllTabsTitles = Array.from(allTabsTitles);
@@ -51,3 +53,4 @@ const getTarget = (e) => {
 };
 
 mainContainer.addEventListener("click", getTarget);
+};
