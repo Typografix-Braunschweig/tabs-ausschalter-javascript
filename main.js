@@ -3,43 +3,51 @@ const allTabsTitles = document.querySelectorAll(".eael-tab-item-trigger");
 const arrayAllTabsTitles = Array.from(allTabsTitles);
 const allTabsContent = document.querySelectorAll(".eael-tab-content-item");
 const arrayAllTabsContent = Array.from(allTabsContent);
-const test222 = document.querySelector(".eael-tabs-content>div.active");
-console.log(test222);
 
-
-console.log(arrayAllTabsContent);
 let idTarget;
 
 const getTarget = (e) => {
+   //todo: divide this fcn into 2 or more
 
-  arrayAllTabsTitles
-  .filter((title) => title !== e.target)
-  .forEach((element) => {
-     element.classList.remove("active");
-     element.classList.add("inactive");
-     if (e.target.tagName.toLowerCase() === "span") {      
-      element.parentElement.classList.remove("active");
-     element.parentElement.classList.add("inactive");    
-     } else {      
-      /*element.firstElementChild.classList.remove("active");
-     element.firstElementChild.classList.add("inactive");*/    
-  }
-});
-idTarget = e.target.getAttribute("id");
-let contentTarget = document.querySelector(`div #${idTarget}-tab`);
-console.log(contentTarget.style.display);
-console.log(contentTarget);
+   // fcn regards to the titles od the tabs; it make all title tabs inactive apart from the target:
+   arrayAllTabsTitles
+      .filter((title) => title !== e.target)
+      .forEach((element) => {
+         element.classList.remove("active");
+         element.classList.add("inactive");
+         /* if (e.target.tagName.toLowerCase() === "span") {
+            element.parentElement.classList.remove("active");
+            element.parentElement.classList.add("inactive");
+         } else {*/
+         /*element.firstElementChild.classList.remove("active");
+     element.firstElementChild.classList.add("inactive");*/
+         // }
+      });
 
-  console.log(arrayAllTabsContent
-  .filter((content) => ((content !== test222)&&(content !==contentTarget))));
+   //
+   //fcn seeking the displayed Text-Content-Beschriftung; and then all the T-C-B are getting inactive obviously except the target:
+   if (e.target.tagName.toLowerCase() === "span") {
+      idTarget = e.target.parentElement.getAttribute("id");
+   } else {
+      idTarget = e.target.getAttribute("id");
+   }
 
-  /*.forEach((element) => {
-    console.log(element);
-    element.classList.remove("active");
-     element.classList.add("inactive");
-  });*/
+   const contentAllTargets = document.querySelectorAll(`#${idTarget}-tab`);
+   contentAllTargets.forEach((el) => {
+      console.log(el);
+   });
+   const arrayContentAllTargets = Array.from(contentAllTargets);
+   const contentTarget = arrayContentAllTargets.filter((contTar) => contTar.classList.contains("active"))[0];
 
+   /*console.log(contentTarget);
+   console.log(arrayAllTabsContent.filter((content) => content !== contentTarget));*/
+
+   const filteredArrayAllTabsContent = arrayAllTabsContent.filter((content) => content !== contentTarget);
+
+   filteredArrayAllTabsContent.forEach((element) => {
+      element.classList.remove("active");
+      element.classList.add("inactive");
+   });
 };
 
 mainContainer.addEventListener("click", getTarget);
-
